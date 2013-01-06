@@ -18,15 +18,33 @@
 # Basically, merge the whole entry onto one line, with newlines replaced by |
 
 my $temp = "";
-open(NEWFILE,+<newAddressFile.txt.);
+open(NEWFILE,"<","ChristmasCardAddresses.txt");
 
-while(<>) {
+while(<NEWFILE>) {
    my $input = $_;
+   $input=~ s/^\s*(.*)\s*$/$1/;
    my $strlen = length($input);
-   if ($strlen > 0 ) {
+   if ($strlen <= 0 ) {
+      #print "EMPTY";
+   } else {
    
+   #   //if the line starts with a digit with only alphabet characters afterwards
+   #      //then it's an address line
+   #   //if the line ends with five digits, or five digits separated by four digits with a dash, 
+   #      //then it's a zip code.
+   #      //if there are characters preceding the zip code,
+   #         //then those are City , state
+   #         //the part preceeding the comma is a city
+   #         //the part following the comma is the state
+   #   //if the line has no digits
+   #      //if it was immediately preceded by a blank space, 
+   #         //then it's a name
+   #      //if it has a comma in it, 
+   #         // then it's a city-state pairing
+   #         //the part preceeding the comma is a city
+   #         //the part following the comma is the state
+    
+      print $input."\n";
    }
-   
-
 }
 
