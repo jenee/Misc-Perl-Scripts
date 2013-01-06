@@ -20,14 +20,19 @@
 my $temp = "";
 open(NEWFILE,"<","ChristmasCardAddresses.txt");
 
+my $isLastEmptyLine = 0;
+
 while(<NEWFILE>) {
    my $input = $_;
    $input=~ s/^\s*(.*)\s*$/$1/;
    my $strlen = length($input);
    if ($strlen <= 0 ) {
-      #print "EMPTY";
+      if( $isLastEmptyLine == 0 ) {
+         print "\n"; #print "EMPTY";
+      }
+      $isLastEmptyLine = 1;
    } else {
-   
+      
    #   //if the line starts with a digit with only alphabet characters afterwards
    #      //then it's an address line
    #   //if the line ends with five digits, or five digits separated by four digits with a dash, 
@@ -45,6 +50,7 @@ while(<NEWFILE>) {
    #         //the part following the comma is the state
     
       print $input."\n";
+      $isLastEmptyLine = 0;
    }
 }
 
